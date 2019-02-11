@@ -1,0 +1,30 @@
+---
+- hosts: webservers
+  become: yes
+  remote_user: vagrant
+  tasks:
+    - name: install httpd
+      yum:
+        update_cache: yes
+        name: httpd
+        state: installed
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+    - name: copy index.xtml file to webservers
+      copy:
+        src: index.html
+        dest: /var/www/html
+    - name: copy files on remote machine
+      copy: 
+        src: /home/vagrant/file1
+        dest: /tmp
+        remote_src: yes
+    - name: create a file and change ownership
+      file:
+        path: /home/vagrant/data
+        state: touch
+        owner: root
+        group: vagrant
+        mode: 0777
