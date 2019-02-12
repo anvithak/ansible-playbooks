@@ -1,0 +1,10 @@
+---
+- hosts: dbservers
+  become: yes
+  tasks:
+    - name: copy file
+      copy: 
+        src: if.sh
+        dest: /home/vagrant
+    - name: execution shell command
+      shell: bash /home/vagrant/if.sh 
