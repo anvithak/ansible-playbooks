@@ -1,0 +1,5 @@
+pack1: wget
+pack2: unzip
+pack3: python
+pack4: tree
+uname: sunny
