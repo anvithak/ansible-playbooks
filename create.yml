@@ -1,0 +1,21 @@
+---
+- hosts: dbservers
+  become: yes
+  tasks:
+    - name: copy file to remote machine
+      copy:
+        src: /home/vagrant/file7
+        dest: /tmp
+    - name: replace content word in file
+      replace:
+        path: /tmp/file7
+        regexp: 'hello'
+        replace: "world"
+      register: saveoutput
+    - name: print the output
+      debug: 
+        msg: "{{saveoutput}}"
+
+     
+        
+    
