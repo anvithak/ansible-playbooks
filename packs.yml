@@ -1,0 +1,26 @@
+---
+- hosts: dbservers
+  become: yes
+  gather_facts: false
+  vars:
+    pack1 : wget
+    pack2 : unzip
+    pack3 : python
+    pack4 : tree
+    uname : anu
+  tasks:
+    - name: install packages
+      apt:
+        name: ['{{pack1}}', '{{pack2}}', '{{pack3}}', '{{pack4}}']
+        state: present
+        update_cache: yes
+      with_items:
+        - "{{pack1}}"
+        - "{{pack2}}"
+        - "{{pack3}}"
+        - "{{pack4}}"
+    - name: create a user
+      user:
+        name: "{{uname}}"
+        state: present
+

@@ -1,0 +1,14 @@
+---
+- hosts: dbservers
+  become: yes
+  remote_user: vagrant
+  tasks:
+    - name: install nginx service
+      apt:
+        #update_cache: yes
+        name: nginx
+        state: present
+    - name: start nginx service
+      service:
+        name: nginx
+        state: restarted
