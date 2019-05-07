@@ -1,0 +1,20 @@
+---
+- hosts: webservers
+  become: yes
+  gather_facts: false
+  vars_files:
+   - vars.yml
+  tasks:
+    - name: install packages
+      yum:
+        name: "{{item}}"
+        state: present
+      loop:
+        - "{{pack1}}"
+        - "{{pack2}}"
+        - "{{pack3}}"
+        - "{{pack4}}"
+    - name: create a user
+      user:
+        name: "{{uname}}"
+        state: present

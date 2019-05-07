@@ -1,0 +1,25 @@
+#download html file nd untar file 
+---
+- hosts: dbservers
+  become: yes
+  tasks:
+    - name: install unzip
+      apt:
+        name: unzip
+        state: present
+    - name: download the template
+      get_url:
+        url: https://www.tooplate.com/download/2109_the_card
+        dest: /home/vagrant
+      register: stdout
+      tags: debug
+    - name: print output
+      debug: 
+        msg: "{{stdout}}"
+      tags: debug
+    - name: untar the file
+      unarchive:
+        src: /home/vagrant/2109_the_card.zip
+        dest: /var/www/html
+        remote_src: yes
+   
